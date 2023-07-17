@@ -1,15 +1,28 @@
 package pl.pilichm.ciphers.substitution;
 
 import pl.pilichm.ciphers.Cipher;
+import pl.pilichm.util.Constants;
+import pl.pilichm.util.SupportedLanguages;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.*;
 
 public class CaesarCipher implements Cipher {
-    private final ArrayList<Character> alphabet = new ArrayList<>(List.of(
-            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
-    ));
+    private SupportedLanguages chosenLanguage;
+
+    public CaesarCipher(SupportedLanguages chosenLanguage) {
+        this.chosenLanguage = chosenLanguage;
+    }
+
+    public void setChosenLanguage(SupportedLanguages chosenLanguage) {
+        this.chosenLanguage = chosenLanguage;
+    }
+
+    public SupportedLanguages getChosenLanguage() {
+        return chosenLanguage;
+    }
+
     private final int caesarOffset = 23;
 
     @Override
@@ -21,6 +34,7 @@ public class CaesarCipher implements Cipher {
         StringBuilder encodedText = new StringBuilder();
         textToEncode = textToEncode.toUpperCase();
         CharacterIterator it = new StringCharacterIterator(textToEncode);
+        ArrayList<Character> alphabet = getAlphabet();
 
         while (it.current() != CharacterIterator.DONE) {
             if (it.current() != ' ') {
@@ -45,6 +59,7 @@ public class CaesarCipher implements Cipher {
         StringBuilder decodedText = new StringBuilder();
         textToDecode = textToDecode.toUpperCase();
         CharacterIterator it = new StringCharacterIterator(textToDecode);
+        ArrayList<Character> alphabet = getAlphabet();
 
         while (it.current() != CharacterIterator.DONE){
             if (it.current() != ' ') {
@@ -64,5 +79,16 @@ public class CaesarCipher implements Cipher {
         }
 
         return decodedText.toString();
+    }
+
+    private ArrayList<Character> getAlphabet(){
+        switch (getChosenLanguage()){
+            case POLISH -> {
+                return new ArrayList<>(Constants.alphabetPolish);
+            }
+            default -> {
+                return new ArrayList<>(Constants.alphabetEnglish);
+            }
+        }
     }
 }
