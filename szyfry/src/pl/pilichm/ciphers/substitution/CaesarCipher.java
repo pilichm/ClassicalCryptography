@@ -10,9 +10,11 @@ import java.util.*;
 
 public class CaesarCipher implements Cipher {
     private SupportedLanguages chosenLanguage;
+    private ArrayList<Character> nonLetterCharacters;
 
     public CaesarCipher(SupportedLanguages chosenLanguage) {
         this.chosenLanguage = chosenLanguage;
+        this.nonLetterCharacters = new ArrayList<>(Constants.nonLetterCharacters);
     }
 
     public void setChosenLanguage(SupportedLanguages chosenLanguage) {
@@ -37,12 +39,12 @@ public class CaesarCipher implements Cipher {
         ArrayList<Character> alphabet = getAlphabet();
 
         while (it.current() != CharacterIterator.DONE) {
-            if (it.current() != ' ') {
+            if (alphabet.contains(it.current())) {
                 int currentLetterIdx = alphabet.indexOf(it.current());
                 currentLetterIdx = (currentLetterIdx + offset)%alphabet.size();
                 encodedText.append(alphabet.get(currentLetterIdx));
-            } else {
-                encodedText.append(' ');
+            } else if (nonLetterCharacters.contains(it.current()) || it.current() == ' '){
+                encodedText.append(it.current());
             }
             it.next();
         }
@@ -62,7 +64,7 @@ public class CaesarCipher implements Cipher {
         ArrayList<Character> alphabet = getAlphabet();
 
         while (it.current() != CharacterIterator.DONE){
-            if (it.current() != ' ') {
+            if (alphabet.contains(it.current())) {
                 int currentLetterIdx = alphabet.indexOf(it.current());
                 currentLetterIdx = (currentLetterIdx - offset)%alphabet.size();
 
@@ -71,8 +73,8 @@ public class CaesarCipher implements Cipher {
                 }
 
                 decodedText.append(alphabet.get(currentLetterIdx));
-            } else {
-                decodedText.append(' ');
+            } else if (nonLetterCharacters.contains(it.current()) || it.current() == ' '){
+                decodedText.append(it.current());
             }
 
             it.next();

@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("main() - start.");
 
-        System.out.println("Test Caesar cipher on english text.");
+        System.out.println("\nTest Caesar cipher on english text.");
         String plainText = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
         CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
         String encodedText = cc.encode(plainText);
@@ -15,14 +15,14 @@ public class Main {
         String decodedText = cc.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
 
-        System.out.println("Test Caesar cipher on polish text.");
+        System.out.println("\nTest Caesar cipher on polish text.");
         cc.setChosenLanguage(SupportedLanguages.POLISH);
-        plainText = "Litwo Ojczyzno moja ty jesteś jak zdrowie";
+        plainText = "Litwo! Ojczyzno moja, ty jesteś jak zdrowie";
         encodedText = cc.encode(plainText);
         System.out.println("Encoded text: " + encodedText);
         decodedText = cc.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
 
-        System.out.println("main() - end.");
+        System.out.println("\nmain() - end.");
         }
 }
