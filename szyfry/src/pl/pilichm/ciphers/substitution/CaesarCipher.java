@@ -1,5 +1,6 @@
 package pl.pilichm.ciphers.substitution;
 
+import pl.pilichm.ciphers.AbstractCipher;
 import pl.pilichm.ciphers.Cipher;
 import pl.pilichm.util.Constants;
 import pl.pilichm.util.SupportedLanguages;
@@ -8,13 +9,16 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.*;
 
-public class CaesarCipher implements Cipher {
+public class CaesarCipher extends AbstractCipher implements Cipher {
     private SupportedLanguages chosenLanguage;
     private ArrayList<Character> nonLetterCharacters;
+
+    private int offset;
 
     public CaesarCipher(SupportedLanguages chosenLanguage) {
         this.chosenLanguage = chosenLanguage;
         this.nonLetterCharacters = new ArrayList<>(Constants.nonLetterCharacters);
+        this.offset = Constants.caesarOffset;
     }
 
     public void setChosenLanguage(SupportedLanguages chosenLanguage) {
@@ -25,11 +29,9 @@ public class CaesarCipher implements Cipher {
         return chosenLanguage;
     }
 
-    private final int caesarOffset = 23;
-
     @Override
     public String encode(String textToEncode) {
-        return encode(textToEncode, caesarOffset);
+        return encode(textToEncode, offset);
     }
 
     public String encode(String textToEncode, int offset) {
@@ -54,7 +56,7 @@ public class CaesarCipher implements Cipher {
 
     @Override
     public String decode(String textToDecode) {
-        return decode(textToDecode, caesarOffset);
+        return decode(textToDecode, offset);
     }
 
     public String decode(String textToDecode, int offset){
@@ -92,5 +94,9 @@ public class CaesarCipher implements Cipher {
                 return new ArrayList<>(Constants.alphabetEnglish);
             }
         }
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

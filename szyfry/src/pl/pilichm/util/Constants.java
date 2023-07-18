@@ -18,4 +18,5 @@ public class Constants {
             '*', '-', '=', '+', '_', '|', '/', '\\', '@', ':', ';', '<', '>','?', '.', ',', '#', '&', '$', '(', ')'
     );
 
+    public static int caesarOffset = 23;
 }
