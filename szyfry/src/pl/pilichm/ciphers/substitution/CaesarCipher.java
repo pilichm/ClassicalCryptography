@@ -11,7 +11,7 @@ import java.util.*;
 
 public class CaesarCipher extends AbstractCipher implements Cipher {
     private SupportedLanguages chosenLanguage;
-    private ArrayList<Character> nonLetterCharacters;
+    private final ArrayList<Character> nonLetterCharacters;
 
     private int offset;
 

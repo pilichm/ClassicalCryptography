@@ -19,4 +19,5 @@ public class Constants {
     );
 
     public static int caesarOffset = 23;
+    public static int rot13Offset = 13;
 }
