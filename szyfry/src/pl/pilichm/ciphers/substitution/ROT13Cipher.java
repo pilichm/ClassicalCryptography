@@ -5,7 +5,7 @@ import pl.pilichm.util.SupportedLanguages;
 
 public class ROT13Cipher extends CaesarCipher{
     public ROT13Cipher() {
-        super(SupportedLanguages.ENGLISH);
+        super();
         setOffset(Constants.rot13Offset);
     }
 }

@@ -4,20 +4,64 @@ import pl.pilichm.util.Constants;
 import pl.pilichm.util.SupportedLanguages;
 
 import java.io.*;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.function.IntFunction;
 
 public abstract class AbstractCipher {
     public SupportedLanguages chosenLanguage;
     public ArrayList<Character> nonLetterCharacters;
 
-    public File readFile(String pathToFile) {
-        return new File(pathToFile);
-    }
+    public IntFunction<Integer> encodingFunction;
+    public IntFunction<Integer> decodingFunction;
 
-    public abstract String decode(String textToDecode);
+    public String decode(String textToDecode){
+        StringBuilder decodedText = new StringBuilder();
+        textToDecode = textToDecode.toUpperCase();
+        CharacterIterator it = new StringCharacterIterator(textToDecode);
+        ArrayList<Character> alphabet = getAlphabet();
 
-    public abstract String encode(String textToEncode);
+        while (it.current() != CharacterIterator.DONE){
+            if (alphabet.contains(it.current())) {
+                int currentLetterIdx = alphabet.indexOf(it.current());
+                currentLetterIdx = decodingFunction.apply(currentLetterIdx);
+
+                if (currentLetterIdx < 0) {
+                    currentLetterIdx += alphabet.size();
+                }
+
+                decodedText.append(alphabet.get(currentLetterIdx));
+            } else if (nonLetterCharacters.contains(it.current()) || it.current() == ' '){
+                decodedText.append(it.current());
+            }
+
+            it.next();
+        }
+
+        return decodedText.toString();
+    };
+
+    public String encode(String textToEncode) {
+        StringBuilder encodedText = new StringBuilder();
+        textToEncode = textToEncode.toUpperCase();
+        CharacterIterator it = new StringCharacterIterator(textToEncode);
+        ArrayList<Character> alphabet = getAlphabet();
+
+        while (it.current() != CharacterIterator.DONE) {
+            if (alphabet.contains(it.current())) {
+                int currentLetterIdx = alphabet.indexOf(it.current());
+                currentLetterIdx = encodingFunction.apply(currentLetterIdx);
+                encodedText.append(alphabet.get(currentLetterIdx));
+            } else if (nonLetterCharacters.contains(it.current()) || it.current() == ' '){
+                encodedText.append(it.current());
+            }
+            it.next();
+        }
+
+        return encodedText.toString();
+    };
 
     private void processEncodingDecodingOnFile(String pathToInFile, String pathToOutFile, boolean isEncoded) {
         File inFile = new File(pathToInFile);

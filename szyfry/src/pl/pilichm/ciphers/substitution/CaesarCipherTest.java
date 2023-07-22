@@ -13,40 +13,40 @@ class CaesarCipherTest {
 
     @org.junit.jupiter.api.Test
     void setChosenLanguage() {
-        CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
+        CaesarCipher cc = new CaesarCipher();
         cc.setChosenLanguage(SupportedLanguages.POLISH);
         assertSame(cc.getChosenLanguage(), SupportedLanguages.POLISH);
     }
 
     @org.junit.jupiter.api.Test
     void encode() {
-        CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
+        CaesarCipher cc = new CaesarCipher();
         assertEquals(cc.encode(plainText), encodedText);
     }
 
     @org.junit.jupiter.api.Test
     void encodeWithCustomOffset() {
-        CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
+        CaesarCipher cc = new CaesarCipher();
         cc.setOffset(customTestOffset);
-        assertEquals(cc.encode(plainText, customTestOffset), encodedWith123Offset);
+        assertEquals(cc.encode(plainText), encodedWith123Offset);
     }
 
     @org.junit.jupiter.api.Test
     void decode() {
-        CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
+        CaesarCipher cc = new CaesarCipher();
         assertEquals(cc.decode(encodedText), plainText);
     }
 
     @org.junit.jupiter.api.Test
     void decodeWithCustomOffset() {
-        CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
+        CaesarCipher cc = new CaesarCipher();
         cc.setOffset(customTestOffset);
-        assertEquals(cc.decode(encodedWith123Offset, customTestOffset), plainText);
+        assertEquals(cc.decode(encodedWith123Offset), plainText);
     }
 
     @org.junit.jupiter.api.Test
     void setOffset() {
-        CaesarCipher cc = new CaesarCipher(SupportedLanguages.POLISH);
+        CaesarCipher cc = new CaesarCipher();
         cc.setOffset(customTestOffset);
         assertSame(cc.getOffset(), customTestOffset);
     }

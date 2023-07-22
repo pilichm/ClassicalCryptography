@@ -5,73 +5,17 @@ import pl.pilichm.ciphers.Cipher;
 import pl.pilichm.util.Constants;
 import pl.pilichm.util.SupportedLanguages;
 
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.*;
+import java.util.ArrayList;
 
 public class CaesarCipher extends AbstractCipher implements Cipher {
     private int offset;
 
-    public CaesarCipher(SupportedLanguages chosenLanguage) {
-        this.chosenLanguage = chosenLanguage;
+    public CaesarCipher() {
         this.nonLetterCharacters = new ArrayList<>(Constants.nonLetterCharacters);
         this.offset = Constants.caesarOffset;
-    }
-
-    @Override
-    public String encode(String textToEncode) {
-        return encode(textToEncode, offset);
-    }
-
-    public String encode(String textToEncode, int offset) {
-        StringBuilder encodedText = new StringBuilder();
-        textToEncode = textToEncode.toUpperCase();
-        CharacterIterator it = new StringCharacterIterator(textToEncode);
-        ArrayList<Character> alphabet = getAlphabet();
-
-        while (it.current() != CharacterIterator.DONE) {
-            if (alphabet.contains(it.current())) {
-                int currentLetterIdx = alphabet.indexOf(it.current());
-                currentLetterIdx = (currentLetterIdx + offset)%alphabet.size();
-                encodedText.append(alphabet.get(currentLetterIdx));
-            } else if (nonLetterCharacters.contains(it.current()) || it.current() == ' '){
-                encodedText.append(it.current());
-            }
-            it.next();
-        }
-
-        return encodedText.toString();
-    }
-
-    @Override
-    public String decode(String textToDecode) {
-        return decode(textToDecode, offset);
-    }
-
-    public String decode(String textToDecode, int offset){
-        StringBuilder decodedText = new StringBuilder();
-        textToDecode = textToDecode.toUpperCase();
-        CharacterIterator it = new StringCharacterIterator(textToDecode);
-        ArrayList<Character> alphabet = getAlphabet();
-
-        while (it.current() != CharacterIterator.DONE){
-            if (alphabet.contains(it.current())) {
-                int currentLetterIdx = alphabet.indexOf(it.current());
-                currentLetterIdx = (currentLetterIdx - offset)%alphabet.size();
-
-                if (currentLetterIdx < 0) {
-                    currentLetterIdx += alphabet.size();
-                }
-
-                decodedText.append(alphabet.get(currentLetterIdx));
-            } else if (nonLetterCharacters.contains(it.current()) || it.current() == ' '){
-                decodedText.append(it.current());
-            }
-
-            it.next();
-        }
-
-        return decodedText.toString();
+        this.setChosenLanguage(SupportedLanguages.ENGLISH);
+        this.encodingFunction = currentLetterIdx -> (currentLetterIdx + offset)%getAlphabet().size();
+        this.decodingFunction = currentLetterIdx -> (currentLetterIdx - offset)%getAlphabet().size();
     }
 
     public void setOffset(int offset) {
