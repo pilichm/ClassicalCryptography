@@ -1,5 +1,6 @@
 package pl.pilichm.main;
 
+import pl.pilichm.ciphers.substitution.AffineCipher;
 import pl.pilichm.ciphers.substitution.CaesarCipher;
 import pl.pilichm.ciphers.substitution.ROT13Cipher;
 import pl.pilichm.util.SupportedLanguages;
@@ -8,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("main() - start.");
 
+        /*
         CaesarCipher cc = new CaesarCipher(SupportedLanguages.ENGLISH);
 
         cc.setChosenLanguage(SupportedLanguages.ENGLISH);
@@ -21,6 +23,14 @@ public class Main {
         String encodedText = rot13.encode(plainText);
         System.out.println("Encoded text: " + encodedText);
         String decodedText = rot13.decode(encodedText);
+        System.out.println("Decoded text: " + decodedText);
+        */
+
+        AffineCipher ac = new AffineCipher();
+        String plainText = "AFFINE CIPHER";
+        String encodedText = ac.encode(plainText);
+        System.out.println("Encoded text: " + encodedText);
+        String decodedText = ac.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
 
         System.out.println("\nmain() - end.");

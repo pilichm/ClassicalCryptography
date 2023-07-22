@@ -1,8 +1,15 @@
 package pl.pilichm.ciphers;
 
+import pl.pilichm.util.Constants;
+import pl.pilichm.util.SupportedLanguages;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class AbstractCipher {
+    public SupportedLanguages chosenLanguage;
+    public ArrayList<Character> nonLetterCharacters;
 
     public File readFile(String pathToFile) {
         return new File(pathToFile);
@@ -67,5 +74,20 @@ public abstract class AbstractCipher {
 
     public void decodeFile(String pathToInFile, String pathToOutFile){
         processEncodingDecodingOnFile(pathToInFile, pathToOutFile, true);
+    }
+
+    public void setChosenLanguage(SupportedLanguages chosenLanguage) {
+        this.chosenLanguage = chosenLanguage;
+    }
+
+    public SupportedLanguages getChosenLanguage() {
+        return chosenLanguage;
+    }
+
+    public ArrayList<Character> getAlphabet(){
+        if (Objects.requireNonNull(getChosenLanguage()) == SupportedLanguages.POLISH) {
+            return new ArrayList<>(Constants.alphabetPolish);
+        }
+        return new ArrayList<>(Constants.alphabetEnglish);
     }
 }

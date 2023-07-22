@@ -10,23 +10,12 @@ import java.text.StringCharacterIterator;
 import java.util.*;
 
 public class CaesarCipher extends AbstractCipher implements Cipher {
-    private SupportedLanguages chosenLanguage;
-    private final ArrayList<Character> nonLetterCharacters;
-
     private int offset;
 
     public CaesarCipher(SupportedLanguages chosenLanguage) {
         this.chosenLanguage = chosenLanguage;
         this.nonLetterCharacters = new ArrayList<>(Constants.nonLetterCharacters);
         this.offset = Constants.caesarOffset;
-    }
-
-    public void setChosenLanguage(SupportedLanguages chosenLanguage) {
-        this.chosenLanguage = chosenLanguage;
-    }
-
-    public SupportedLanguages getChosenLanguage() {
-        return chosenLanguage;
     }
 
     @Override
@@ -83,17 +72,6 @@ public class CaesarCipher extends AbstractCipher implements Cipher {
         }
 
         return decodedText.toString();
-    }
-
-    private ArrayList<Character> getAlphabet(){
-        switch (getChosenLanguage()){
-            case POLISH -> {
-                return new ArrayList<>(Constants.alphabetPolish);
-            }
-            default -> {
-                return new ArrayList<>(Constants.alphabetEnglish);
-            }
-        }
     }
 
     public void setOffset(int offset) {
