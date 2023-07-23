@@ -1,9 +1,13 @@
 package pl.pilichm.main;
 
 import pl.pilichm.ciphers.substitution.AffineCipher;
+import pl.pilichm.ciphers.substitution.AutoKeyCipher;
 import pl.pilichm.ciphers.substitution.CaesarCipher;
 import pl.pilichm.ciphers.substitution.ROT13Cipher;
 import pl.pilichm.util.SupportedLanguages;
+import pl.pilichm.util.Utils;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,12 +29,20 @@ public class Main {
         String decodedText = rot13.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
         */
-
+        /*
         AffineCipher ac = new AffineCipher();
         String plainText = "AFFINE CIPHER";
         String encodedText = ac.encode(plainText);
         System.out.println("Encoded text: " + encodedText);
         String decodedText = ac.decode(encodedText);
+        System.out.println("Decoded text: " + decodedText);
+        */
+
+        AutoKeyCipher akc = new AutoKeyCipher("KILT");
+        String plainText = "meet at the fountain";
+        String encodedText = akc.encode(plainText);
+        System.out.println(encodedText);
+        String decodedText = akc.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
 
         System.out.println("\nmain() - end.");

@@ -2,10 +2,6 @@ package pl.pilichm.ciphers.substitution;
 
 import pl.pilichm.ciphers.AbstractCipher;
 import pl.pilichm.ciphers.Cipher;
-import pl.pilichm.util.Constants;
-import pl.pilichm.util.SupportedLanguages;
-
-import java.util.ArrayList;
 
 public class AffineCipher extends AbstractCipher implements Cipher {
     private int parameter_a;
@@ -20,10 +16,11 @@ public class AffineCipher extends AbstractCipher implements Cipher {
     }
 
     public AffineCipher() {
+        super();
+
         parameter_a = 5;
         parameter_b = 8;
-        chosenLanguage = SupportedLanguages.ENGLISH;
-        nonLetterCharacters = new ArrayList<>(Constants.nonLetterCharacters);
+
         this.encodingFunction = currentLetterIdx ->
                 (parameter_a * currentLetterIdx + parameter_b) % getAlphabet().size();
         this.decodingFunction = currentLetterIdx ->

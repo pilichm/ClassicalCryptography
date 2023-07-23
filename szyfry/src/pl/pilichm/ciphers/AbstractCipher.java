@@ -17,6 +17,11 @@ public abstract class AbstractCipher {
     public IntFunction<Integer> encodingFunction;
     public IntFunction<Integer> decodingFunction;
 
+    public AbstractCipher(){
+        this.chosenLanguage = SupportedLanguages.ENGLISH;
+        this.nonLetterCharacters = new ArrayList<>(Constants.nonLetterCharacters);
+    }
+
     public String decode(String textToDecode){
         StringBuilder decodedText = new StringBuilder();
         textToDecode = textToDecode.toUpperCase();
