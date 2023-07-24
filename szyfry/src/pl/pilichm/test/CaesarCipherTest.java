@@ -1,5 +1,6 @@
-package pl.pilichm.ciphers.substitution;
+package pl.pilichm.test;
 
+import pl.pilichm.ciphers.substitution.CaesarCipher;
 import pl.pilichm.util.SupportedLanguages;
 
 import static org.junit.jupiter.api.Assertions.*;

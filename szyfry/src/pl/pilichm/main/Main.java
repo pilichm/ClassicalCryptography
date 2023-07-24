@@ -37,7 +37,7 @@ public class Main {
         String decodedText = ac.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
         */
-
+        /*
         AutoKeyCipher akc = new AutoKeyCipher("KILT");
         String plainText = "meet at the fountain";
         String encodedText = akc.encode(plainText);
@@ -45,6 +45,22 @@ public class Main {
         String decodedText = akc.decode(encodedText);
         System.out.println("Decoded text: " + decodedText);
 
+         */
+
+        double[][] firstMatrix = {
+                new double[]{1, 5},
+                new double[]{2, 3},
+                new double[]{1, 7}
+        };
+
+        double[][] secondMatrix = {
+                new double[]{1, 2, 3, 7},
+                new double[]{5, 2, 8, 1}
+        };
+
+        double [][] result = Utils.multiplyMatrices(firstMatrix, secondMatrix);
+        Utils.printMatrix(result);
+
         System.out.println("\nmain() - end.");
-        }
+    }
 }

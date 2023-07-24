@@ -1,4 +1,6 @@
-package pl.pilichm.ciphers.substitution;
+package pl.pilichm.test;
+
+import pl.pilichm.ciphers.substitution.AffineCipher;
 
 import static org.junit.jupiter.api.Assertions.*;
 
