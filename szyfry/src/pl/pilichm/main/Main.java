@@ -47,19 +47,14 @@ public class Main {
 
          */
 
-        double[][] firstMatrix = {
-                new double[]{1, 5},
-                new double[]{2, 3},
-                new double[]{1, 7}
+        double[][] matrix = {
+                new double[]{2, -3, 1},
+                new double[]{2, 0, -1},
+                new double[]{1, 4, 5}
         };
 
-        double[][] secondMatrix = {
-                new double[]{1, 2, 3, 7},
-                new double[]{5, 2, 8, 1}
-        };
-
-        double [][] result = Utils.multiplyMatrices(firstMatrix, secondMatrix);
-        Utils.printMatrix(result);
+        double determinant = Utils.calcDeterminantForThreeThreeMatrix(matrix);
+        System.out.println(determinant);
 
         System.out.println("\nmain() - end.");
     }

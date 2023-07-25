@@ -53,4 +53,33 @@ public class Utils {
 
         return resultMatrix;
     }
+
+    public static double calcDeterminantForTwoTwoMatrix(double [][] matrixIn){
+        return matrixIn[0][0] * matrixIn[1][1] - matrixIn[0][1] * matrixIn[1][0];
+    }
+
+    public static double calcDeterminantForThreeThreeMatrix(double [][] matrixIn){
+        double determinant = 0;
+
+        double [][] firstMatrix = {
+                new double[]{matrixIn[1][1], matrixIn[1][2]},
+                new double[]{matrixIn[2][1], matrixIn[2][2]}
+        };
+
+        double [][] secondMatrix = {
+                new double[]{matrixIn[1][0], matrixIn[1][2]},
+                new double[]{matrixIn[2][0], matrixIn[2][2]}
+        };
+
+        double [][] thirdMatrix = {
+                new double[]{matrixIn[1][0], matrixIn[1][1]},
+                new double[]{matrixIn[2][0], matrixIn[2][1]}
+        };
+
+        determinant = matrixIn[0][0] * calcDeterminantForTwoTwoMatrix(firstMatrix)
+                - matrixIn[0][1] * calcDeterminantForTwoTwoMatrix(secondMatrix)
+                + matrixIn[0][2] * calcDeterminantForTwoTwoMatrix(thirdMatrix);
+
+        return determinant;
+    }
 }
