@@ -53,4 +53,38 @@ class UtilsTest {
         double determinantForThreeThreeMatrix = 49;
         assertEquals(calculatedDeterminant, determinantForThreeThreeMatrix);
     }
+
+    @org.junit.jupiter.api.Test
+    void calcExtendedMatrix() {
+        double[][] matrixIn = {
+                new double[]{2, 5, 7},
+                new double[]{6, 3, 4},
+                new double[]{5, -2, -3}
+        };
+
+        double[][] correctResultMatrix = {
+                new double[]{-1.0, 38.0, -27.0},
+                new double[]{1.0, -41.0, 29.0},
+                new double[]{-1.0, 34.0, -24.0 }
+        };
+
+        assertArrayEquals(Utils.calcExtendedMatrix(matrixIn), correctResultMatrix);
+    }
+
+    @org.junit.jupiter.api.Test
+    void transposeMatrix() {
+        double[][] matrixIn = {
+                new double[]{-1.0, 38.0, -27.0},
+                new double[]{1.0, -41.0, 29.0},
+                new double[]{-1.0, 34.0, -24.0 }
+        };
+
+        double[][] transposedMatrix = {
+                new double[]{-1.0, 1.0, -1.0},
+                new double[]{38.0, -41.0, 34.0},
+                new double[]{-27.0, 29.0, -24.0}
+        };
+
+        assertArrayEquals(Utils.transposeMatrix(matrixIn), transposedMatrix);
+    }
 }
