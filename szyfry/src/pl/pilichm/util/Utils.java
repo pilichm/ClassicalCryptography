@@ -1,6 +1,7 @@
 package pl.pilichm.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Utils {
     public static Character[][] getTabulaRectaForLanguage(SupportedLanguages language) {
@@ -82,4 +83,56 @@ public class Utils {
 
         return determinant;
     }
+
+    public static double calcCofactorMatrixDeterminant(double [][] matrixIn, int rowIndex, int colIndex){
+        double [][] cofactorMatrix = new double[matrixIn.length-1][matrixIn.length-1];
+
+        List<Double> correctElements = new ArrayList<>();
+
+        for (int rowIdx=0; rowIdx<matrixIn.length; rowIdx++){
+            for (int colIdx=0; colIdx<matrixIn.length; colIdx++){
+                if (rowIdx!=rowIndex && colIdx!=colIndex){
+                    correctElements.add(matrixIn[rowIdx][colIdx]);
+                }
+            }
+        }
+
+        int counter = 0;
+
+        for (int rowIdx=0; rowIdx<cofactorMatrix.length; rowIdx++){
+            for (int colIdx=0; colIdx<cofactorMatrix.length; colIdx++){
+                cofactorMatrix[rowIdx][colIdx] = correctElements.get(counter);
+                counter += 1;
+            }
+        }
+
+        return calcDeterminantForTwoTwoMatrix(cofactorMatrix);
+    }
+
+    public static double [][] calcExtendedMatrix(double [][] matrixIn){
+        return new double[][]{
+                new double[]{calcCofactorMatrixDeterminant(matrixIn, 0, 0),
+                        -1.0d * calcCofactorMatrixDeterminant(matrixIn, 0, 1),
+                        calcCofactorMatrixDeterminant(matrixIn, 0, 2)},
+                new double[]{-1.0d * calcCofactorMatrixDeterminant(matrixIn, 1, 0),
+                        calcCofactorMatrixDeterminant(matrixIn, 1, 1),
+                        -1.0d * calcCofactorMatrixDeterminant(matrixIn, 1, 2)},
+                new double[]{calcCofactorMatrixDeterminant(matrixIn, 2, 0),
+                        -1.0d * calcCofactorMatrixDeterminant(matrixIn, 2, 1),
+                        calcCofactorMatrixDeterminant(matrixIn, 2, 2)}
+        };
+    }
+
+    public static double [][] transposeMatrix(double [][] matrixIn){
+        double [][] matrixOut = new double[matrixIn.length][matrixIn.length];
+
+        for (int rowIndex=0; rowIndex<matrixIn.length; rowIndex++){
+            for (int colIndex=0; colIndex<matrixIn[0].length; colIndex++){
+                matrixOut[colIndex][rowIndex] = matrixIn[rowIndex][colIndex];
+            }
+        }
+
+        return matrixOut;
+    }
+
 }

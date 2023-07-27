@@ -48,14 +48,14 @@ public class Main {
          */
 
         double[][] matrix = {
-                new double[]{2, -3, 1},
-                new double[]{2, 0, -1},
-                new double[]{1, 4, 5}
+                new double[]{2, 5, 7},
+                new double[]{6, 3, 4},
+                new double[]{5, -2, -3}
         };
 
-        double determinant = Utils.calcDeterminantForThreeThreeMatrix(matrix);
-        System.out.println(determinant);
-
-        System.out.println("\nmain() - end.");
+        double [][] res = Utils.calcExtendedMatrix(matrix);
+        Utils.printMatrix(res);
+        double [][] matrixT = Utils.transposeMatrix(res);
+        Utils.printMatrix(matrixT);
     }
 }
