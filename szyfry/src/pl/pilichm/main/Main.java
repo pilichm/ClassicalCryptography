@@ -53,9 +53,7 @@ public class Main {
                 new double[]{5, -2, -3}
         };
 
-        double [][] res = Utils.calcExtendedMatrix(matrix);
+        double [][] res = Utils.calcInvertedMatrix(matrix);
         Utils.printMatrix(res);
-        double [][] matrixT = Utils.transposeMatrix(res);
-        Utils.printMatrix(matrixT);
     }
 }

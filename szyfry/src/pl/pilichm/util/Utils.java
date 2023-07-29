@@ -135,4 +135,27 @@ public class Utils {
         return matrixOut;
     }
 
+    public static double [][] divideMatrixByValue(double [][] matrixIn, double value){
+        for (int rowIdx=0; rowIdx<matrixIn.length; rowIdx++){
+            for (int colIdx=0; colIdx<matrixIn.length; colIdx++){
+                matrixIn[rowIdx][colIdx] = matrixIn[rowIdx][colIdx]/value;
+            }
+        }
+
+        return matrixIn;
+    }
+
+    public static double [][] calcInvertedMatrix(double [][] matrixIn){
+        double [][] matrixOut = Utils.calcExtendedMatrix(matrixIn);
+        double determinant = Utils.calcDeterminantForThreeThreeMatrix(matrixIn);
+
+        matrixOut = Utils.transposeMatrix(matrixOut);
+
+        if (determinant!=0){
+            matrixOut = Utils.divideMatrixByValue(matrixOut, determinant);
+        }
+
+        return matrixOut;
+    }
+
 }

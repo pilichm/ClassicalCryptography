@@ -87,4 +87,40 @@ class UtilsTest {
 
         assertArrayEquals(Utils.transposeMatrix(matrixIn), transposedMatrix);
     }
+
+    @org.junit.jupiter.api.Test
+    void divideMatrixByValue() {
+        double[][] matrix = {
+                new double[]{2, 5, 7},
+                new double[]{6, 3, 4},
+                new double[]{5, -2, -3}
+        };
+
+        double[][] correctResultMatrix = {
+                new double[]{0.5, 1.25, 1.75},
+                new double[]{1.5, 0.75, 1.0},
+                new double[]{1.25, -0.5, -0.75}
+        };
+
+        double divider = 4;
+
+        assertArrayEquals(Utils.divideMatrixByValue(matrix, divider), correctResultMatrix);
+    }
+
+    @org.junit.jupiter.api.Test
+    void calcInvertedMatrix() {
+        double[][] matrix = {
+                new double[]{2, 5, 7},
+                new double[]{6, 3, 4},
+                new double[]{5, -2, -3}
+        };
+
+        double[][] correctResultMatrix = {
+                new double[]{1.0, -1.0, 1.0},
+                new double[]{-38.0, 41.0, -34.0},
+                new double[]{27.0, -29.0, 24.0}
+        };
+
+        assertArrayEquals(Utils.calcInvertedMatrix(matrix), correctResultMatrix);
+    }
 }
