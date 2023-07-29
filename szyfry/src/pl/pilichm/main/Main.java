@@ -1,9 +1,6 @@
 package pl.pilichm.main;
 
-import pl.pilichm.ciphers.substitution.AffineCipher;
-import pl.pilichm.ciphers.substitution.AutoKeyCipher;
-import pl.pilichm.ciphers.substitution.CaesarCipher;
-import pl.pilichm.ciphers.substitution.ROT13Cipher;
+import pl.pilichm.ciphers.substitution.*;
 import pl.pilichm.util.SupportedLanguages;
 import pl.pilichm.util.Utils;
 
@@ -47,13 +44,17 @@ public class Main {
 
          */
 
-        double[][] matrix = {
-                new double[]{2, 5, 7},
-                new double[]{6, 3, 4},
-                new double[]{5, -2, -3}
+        double [][] key = {
+                new double[]{6, 24, 1},
+                new double[]{13, 16, 10},
+                new double[]{20, 17, 15}
         };
 
-        double [][] res = Utils.calcInvertedMatrix(matrix);
-        Utils.printMatrix(res);
+        String plainText = "CAT";
+        HillCipher hc = new HillCipher();
+        hc.setKey(key);
+        String encodedText = hc.encode(plainText);
+        System.out.println(encodedText);
+
     }
 }
