@@ -1,10 +1,7 @@
 package pl.pilichm.main;
 
 import pl.pilichm.ciphers.substitution.*;
-import pl.pilichm.util.SupportedLanguages;
 import pl.pilichm.util.Utils;
-
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -55,6 +52,8 @@ public class Main {
         hc.setKey(key);
         String encodedText = hc.encode(plainText);
         System.out.println(encodedText);
+        String decodedText = hc.decode(encodedText);
+        System.out.println(decodedText);
 
     }
 }

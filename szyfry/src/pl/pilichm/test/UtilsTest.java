@@ -89,38 +89,39 @@ class UtilsTest {
     }
 
     @org.junit.jupiter.api.Test
-    void divideMatrixByValue() {
+    void multipleMatrixByValueWithModulo() {
         double[][] matrix = {
-                new double[]{2, 5, 7},
-                new double[]{6, 3, 4},
-                new double[]{5, -2, -3}
+                new double[]{6, 24, 1},
+                new double[]{13, 16, 10},
+                new double[]{20, 17, 15}
         };
 
         double[][] correctResultMatrix = {
-                new double[]{0.5, 1.25, 1.75},
-                new double[]{1.5, 0.75, 1.0},
-                new double[]{1.25, -0.5, -0.75}
+                new double[]{20, 2, 25},
+                new double[]{13, 10, 16},
+                new double[]{6, 9, 11}
         };
 
-        double divider = 4;
+        double multiplier = 25;
+        double modulo = 26;
 
-        assertArrayEquals(Utils.divideMatrixByValue(matrix, divider), correctResultMatrix);
+        assertArrayEquals(Utils.multipleMatrixByValueWithModulo(matrix, multiplier, modulo), correctResultMatrix);
     }
 
     @org.junit.jupiter.api.Test
-    void calcInvertedMatrix() {
+    void calcInvertedModuloMatrix() {
         double[][] matrix = {
-                new double[]{2, 5, 7},
-                new double[]{6, 3, 4},
-                new double[]{5, -2, -3}
+                new double[]{6, 24, 1},
+                new double[]{13, 16, 10},
+                new double[]{20, 17, 15}
         };
 
         double[][] correctResultMatrix = {
-                new double[]{1.0, -1.0, 1.0},
-                new double[]{-38.0, 41.0, -34.0},
-                new double[]{27.0, -29.0, 24.0}
+                new double[]{8, 5, 10},
+                new double[]{21, 8, 21},
+                new double[]{21, 12, 8}
         };
 
-        assertArrayEquals(Utils.calcInvertedMatrix(matrix), correctResultMatrix);
+        assertArrayEquals(Utils.calcInvertedModuloMatrix(matrix, 26), correctResultMatrix);
     }
 }
