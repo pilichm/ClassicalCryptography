@@ -1,6 +1,7 @@
 package pl.pilichm.main;
 
 import pl.pilichm.ciphers.substitution.*;
+import pl.pilichm.ciphers.transposition.ColumnarTranspositionCipher;
 import pl.pilichm.util.Utils;
 
 public class Main {
@@ -40,20 +41,27 @@ public class Main {
         System.out.println("Decoded text: " + decodedText);
 
          */
+//
+//        double [][] key = {
+//                new double[]{6, 24, 1},
+//                new double[]{13, 16, 10},
+//                new double[]{20, 17, 15}
+//        };
+//
+//        String plainText = "CAT";
+//        HillCipher hc = new HillCipher();
+//        hc.setKey(key);
+//        String encodedText = hc.encode(plainText);
+//        System.out.println(encodedText);
+//        String decodedText = hc.decode(encodedText);
+//        System.out.println(decodedText);
 
-        double [][] key = {
-                new double[]{6, 24, 1},
-                new double[]{13, 16, 10},
-                new double[]{20, 17, 15}
-        };
+        ColumnarTranspositionCipher ctc = new ColumnarTranspositionCipher();
+        ctc.setKey("ZEBRAS");
 
-        String plainText = "CAT";
-        HillCipher hc = new HillCipher();
-        hc.setKey(key);
-        String encodedText = hc.encode(plainText);
+        String key = "ZEBRAS";
+        String plaintext = "WE ARE DISCOVERED. FLEE AT ONCE.";
+        String encodedText = ctc.encode(plaintext);
         System.out.println(encodedText);
-        String decodedText = hc.decode(encodedText);
-        System.out.println(decodedText);
-
     }
 }

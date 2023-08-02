@@ -3,7 +3,7 @@ package pl.pilichm.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Utils {
+public class Utils<T> {
     public static Character[][] getTabulaRectaForLanguage(SupportedLanguages language) {
         ArrayList<Character> alphabet;
 
@@ -30,10 +30,10 @@ public class Utils {
         return tabulaRecta;
     }
 
-    public static void printMatrix(double[][] matrix){
-        for (double[] doubles : matrix) {
+    public void printMatrix(T[][] matrix){
+        for (T[] values : matrix) {
             for (int col = 0; col < matrix[0].length; col++) {
-                System.out.print(doubles[col] + " ");
+                System.out.print(values[col] + " ");
             }
             System.out.println("\n");
         }
