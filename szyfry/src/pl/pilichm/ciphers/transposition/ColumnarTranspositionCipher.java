@@ -7,6 +7,7 @@ import pl.pilichm.util.Utils;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ColumnarTranspositionCipher extends AbstractCipher implements Cipher {
@@ -20,7 +21,6 @@ public class ColumnarTranspositionCipher extends AbstractCipher implements Ciphe
     public String encode(String textToEncode) {
         StringBuilder processedText = new StringBuilder();
         textToEncode = textToEncode.toUpperCase();
-        Utils<Character> utils = new Utils<>();
 
         if (key==null ||  key.equalsIgnoreCase("")){
             return processedText.toString();
@@ -30,13 +30,10 @@ public class ColumnarTranspositionCipher extends AbstractCipher implements Ciphe
         int numberOfCols = key.length();
 
         if (textToEncode.length()%key.length()!=0){
-            System.out.println("add 1");
             numberOfRows += 1;
         }
 
         Character [][] plainTextArray = createCharArrayWithRandomValues(numberOfRows, numberOfCols);
-        System.out.println("Array of random letters:");
-        utils.printMatrix(plainTextArray);
 
         CharacterIterator it = new StringCharacterIterator(textToEncode);
         int currentRowIdx = 0;
@@ -57,19 +54,11 @@ public class ColumnarTranspositionCipher extends AbstractCipher implements Ciphe
             it.next();
         }
 
-        System.out.println("Array of plaintext letters:");
-        utils.printMatrix(plainTextArray);
+        Integer [] columnOrder = getColumnOrderFromKey();
 
-        int [] columnOrder = getColumnOrderFromKey();
-        System.out.println("Column order from key:");
-        for (int index=0; index<columnOrder.length; index++) {
-            System.out.print(columnOrder[index] + " ");
-        }
-        System.out.println();
-
-        for (int index=0; index<columnOrder.length; index++){
-            for (int rowIndex=0; rowIndex<numberOfRows; rowIndex++){
-                processedText.append(plainTextArray[rowIndex][columnOrder[index]]);
+        for (Integer integer : columnOrder) {
+            for (int rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
+                processedText.append(plainTextArray[rowIndex][integer]);
             }
             processedText.append(" ");
         }
@@ -100,8 +89,8 @@ public class ColumnarTranspositionCipher extends AbstractCipher implements Ciphe
      * Converts string encryption/decryption key to array of ints determining reading order of columns in encryption matrix.
      * @return -> int array of matrix columns order.
      */
-    private int [] getColumnOrderFromKey(){
-        int [] columnOrder = new int[key.length()];
+    private Integer [] getColumnOrderFromKey(){
+        Integer [] columnOrder = new Integer[key.length()];
         ArrayList<Character> alphabet = getAlphabet();
 
         class KeyElement{
@@ -136,5 +125,37 @@ public class ColumnarTranspositionCipher extends AbstractCipher implements Ciphe
         }
 
         return columnOrder;
+    }
+
+    @Override
+    public String decode(String textToDecode) {
+        StringBuilder processedText = new StringBuilder();
+
+        int numberOfColumns = (textToDecode.replace(" ", "").length()) / key.length();
+        Integer [] columnOrder = getColumnOrderFromKey();
+        Character [][] encodedTextArray = new Character[key.length()][numberOfColumns];
+        Character [][] orderedArray = new Character[key.length()][numberOfColumns];
+        String [] splitEncodedText = textToDecode.split(" ");
+
+
+        for (int rowIdx=0; rowIdx<key.length(); rowIdx++){
+            for (int colIdx=0; colIdx<numberOfColumns; colIdx++){
+                encodedTextArray[rowIdx][colIdx] = splitEncodedText[colIdx].toCharArray()[rowIdx];
+            }
+        }
+
+        for (int rowIdx=0; rowIdx<key.length(); rowIdx++){
+            for (int colIdx=0; colIdx<numberOfColumns; colIdx++){
+                orderedArray[rowIdx][colIdx] = encodedTextArray[rowIdx][List.of(columnOrder).indexOf(colIdx)];
+            }
+        }
+
+        for (int rowIdx=0; rowIdx<key.length(); rowIdx++){
+            for (int colIdx=0; colIdx<numberOfColumns; colIdx++){
+                processedText.append(orderedArray[rowIdx][colIdx]);
+            }
+        }
+
+        return processedText.toString();
     }
 }

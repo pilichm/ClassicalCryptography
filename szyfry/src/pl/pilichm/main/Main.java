@@ -63,5 +63,7 @@ public class Main {
         String plaintext = "WE ARE DISCOVERED. FLEE AT ONCE.";
         String encodedText = ctc.encode(plaintext);
         System.out.println(encodedText);
+        String decodedText = ctc.decode(encodedText);
+        System.out.println(decodedText);
     }
 }
