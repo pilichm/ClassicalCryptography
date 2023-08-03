@@ -2,7 +2,6 @@ package pl.pilichm.ciphers.transposition;
 
 import pl.pilichm.ciphers.AbstractCipher;
 import pl.pilichm.ciphers.Cipher;
-import pl.pilichm.util.Utils;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;

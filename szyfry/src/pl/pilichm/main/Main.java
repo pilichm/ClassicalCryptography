@@ -58,8 +58,6 @@ public class Main {
 
         ColumnarTranspositionCipher ctc = new ColumnarTranspositionCipher();
         ctc.setKey("ZEBRAS");
-
-        String key = "ZEBRAS";
         String plaintext = "WE ARE DISCOVERED. FLEE AT ONCE.";
         String encodedText = ctc.encode(plaintext);
         System.out.println(encodedText);
