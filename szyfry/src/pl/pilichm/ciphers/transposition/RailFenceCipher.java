@@ -69,6 +69,6 @@ public class RailFenceCipher extends AbstractCipher implements Cipher {
             processedText.append(" ");
         }
 
-        return processedText.toString();
+        return processedText.toString().trim();
     }
 }
