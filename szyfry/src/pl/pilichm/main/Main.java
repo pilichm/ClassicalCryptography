@@ -2,6 +2,7 @@ package pl.pilichm.main;
 
 import pl.pilichm.ciphers.substitution.*;
 import pl.pilichm.ciphers.transposition.ColumnarTranspositionCipher;
+import pl.pilichm.ciphers.transposition.RailFenceCipher;
 import pl.pilichm.util.Utils;
 
 public class Main {
@@ -56,12 +57,10 @@ public class Main {
 //        String decodedText = hc.decode(encodedText);
 //        System.out.println(decodedText);
 
-        ColumnarTranspositionCipher ctc = new ColumnarTranspositionCipher();
-        ctc.setKey("ZEBRAS");
-        String plaintext = "WE ARE DISCOVERED. FLEE AT ONCE.";
-        String encodedText = ctc.encode(plaintext);
+        RailFenceCipher rfc = new RailFenceCipher();
+        rfc.setKey(3);
+        String plainText = "WE ARE DISCOVERED. RUN AT ONCE.";
+        String encodedText = rfc.encode(plainText);
         System.out.println(encodedText);
-        String decodedText = ctc.decode(encodedText);
-        System.out.println(decodedText);
     }
 }
