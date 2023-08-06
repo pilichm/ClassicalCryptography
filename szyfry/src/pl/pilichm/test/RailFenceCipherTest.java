@@ -15,4 +15,14 @@ class RailFenceCipherTest {
 
         assertEquals(rfc.encode(plainText), correctEncryptedText);
     }
+
+    @org.junit.jupiter.api.Test
+    void decode() {
+        String encodedText = "WIRA EDSEENTE AECVDUOC RORN";
+        String decodedText = "WEAREDISCOVEREDRUNATONCE";
+        RailFenceCipher rfc = new RailFenceCipher();
+        rfc.setKey(4);
+
+        assertEquals(rfc.decode(encodedText), decodedText);
+    }
 }
