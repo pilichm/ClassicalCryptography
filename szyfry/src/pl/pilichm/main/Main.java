@@ -58,9 +58,11 @@ public class Main {
 //        System.out.println(decodedText);
 
         RailFenceCipher rfc = new RailFenceCipher();
-        rfc.setKey(3);
+        rfc.setKey(4);
         String plainText = "WE ARE DISCOVERED. RUN AT ONCE.";
         String encodedText = rfc.encode(plainText);
         System.out.println(encodedText);
+        String decodedText = rfc.decode(encodedText);
+        System.out.println(decodedText);
     }
 }
