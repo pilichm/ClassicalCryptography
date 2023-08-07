@@ -53,6 +53,42 @@ Hill cipher is a polygraphic substitution cipher based on linear algebra. Invent
 
 <b>Ciphertext:</b> POH
 
+<h3>Transposition</h3>
+<h4>Columnar</h4>
+https://en.wikipedia.org/wiki/Transposition_cipher#Columnar_transposition
+
+In a columnar transposition, the message is written out in rows of a fixed length, and then read out again column by column, and the columns are chosen in some scrambled order.
+
+<b>Plaintext: </b>WE ARE DISCOVERED
+<br>
+<b>Key: </b>ZEBRAS
+<br>
+<b>Encryption matrix:</b>
+<br>
+W E A R E D<br>
+I S C O V E <br>
+R E D F L E <br>
+E A T O N C <br>
+E Q K J E U <br>
+<b>Ciphertext:</b><br>
+EVLNE ACDTK ESEAQ ROFOJ DEECU WIREE
+<br>
+<br>
+<h4>Rail fence</h4>
+https://en.wikipedia.org/wiki/Rail_fence_cipher
+
+In the rail fence cipher, the plaintext is written downwards diagonally on successive "rails" of an imaginary fence, then moving up when the bottom rail is reached, down again when the top rail is reached, and so on until the whole plaintext is written out.
+
+<b>Plaintext: </b>WE ARE DISCOVERED
+<br>
+<b>Encryption matrix ('fence'):</b>
+<br>
+W . . . E . . . C . . . R . . . U . . . O . . . <br>
+. E . R . D . S . O . E . E . R . N . T . N . E <br>
+. . A . . . I . . . V . . . D . . . A . . . C . <br>
+<b>Ciphertext:</b><br>
+WECRUO ERDSOEERNTNE AIVDAC
+
 <h3>Used technologies:</h3>
 
 - java (openjdk-20),
