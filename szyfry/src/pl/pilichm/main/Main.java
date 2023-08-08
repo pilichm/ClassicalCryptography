@@ -1,5 +1,6 @@
 package pl.pilichm.main;
 
+import pl.pilichm.ciphers.square.PlayfairCipher;
 import pl.pilichm.ciphers.substitution.*;
 import pl.pilichm.ciphers.transposition.ColumnarTranspositionCipher;
 import pl.pilichm.ciphers.transposition.RailFenceCipher;
@@ -57,12 +58,15 @@ public class Main {
 //        String decodedText = hc.decode(encodedText);
 //        System.out.println(decodedText);
 
-        RailFenceCipher rfc = new RailFenceCipher();
-        rfc.setKey(4);
-        String plainText = "WE ARE DISCOVERED. RUN AT ONCE.";
-        String encodedText = rfc.encode(plainText);
-        System.out.println(encodedText);
-        String decodedText = rfc.decode(encodedText);
-        System.out.println(decodedText);
+//        RailFenceCipher rfc = new RailFenceCipher();
+//        rfc.setKey(4);
+//        String plainText = "WE ARE DISCOVERED. RUN AT ONCE.";
+//        String encodedText = rfc.encode(plainText);
+//        System.out.println(encodedText);
+//        String decodedText = rfc.decode(encodedText);
+//        System.out.println(decodedText);
+
+        PlayfairCipher pc = new PlayfairCipher();
+        pc.test();
     }
 }
