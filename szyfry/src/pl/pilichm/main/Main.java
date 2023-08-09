@@ -67,6 +67,9 @@ public class Main {
 //        System.out.println(decodedText);
 
         PlayfairCipher pc = new PlayfairCipher();
-        pc.test();
+        //pc.test();
+        String plainText = "hide the gold in the tree stump";
+        String encodedText = pc.encode(plainText);
+        System.out.println(encodedText);
     }
 }
