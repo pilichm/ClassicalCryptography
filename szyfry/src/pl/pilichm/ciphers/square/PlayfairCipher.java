@@ -77,7 +77,7 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
      * @param secondLetter -> second letter for encryption.
      * @return -> Two encrypted letters as array.
      */
-    private Character[] encryptLetter(Character firstLetter, Character secondLetter){
+    private Character[] encryptLetters(Character firstLetter, Character secondLetter){
         Character [] result = new Character[2];
 
         Coordinates firstLetterCor = getLocationOfLetter(firstLetter);
@@ -131,6 +131,53 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
         return result;
     }
 
+    private Character[] decryptLetters(Character firstLetter, Character secondLetter) {
+        Character [] result = new Character[2];
+
+        Coordinates firstLetterCor = getLocationOfLetter(firstLetter);
+        Coordinates secondLetterCor = getLocationOfLetter(secondLetter);
+        System.out.println(firstLetterCor);
+        System.out.println(secondLetterCor);
+
+        if (firstLetterCor.getColIdx()==secondLetterCor.getColIdx()
+                && firstLetterCor.getRowIdx()!=secondLetterCor.getRowIdx()){
+            if (firstLetterCor.getRowIdx()==0){
+                result[0] = key[key.length-1][firstLetterCor.getColIdx()];
+            } else {
+                result[0] = key[firstLetterCor.getRowIdx()-1][firstLetterCor.getColIdx()];
+            }
+
+            if (secondLetterCor.getRowIdx()==0){
+                result[1] = key[key.length-1][secondLetterCor.getColIdx()];
+            } else {
+                result[1] = key[secondLetterCor.getRowIdx()-1][secondLetterCor.getColIdx()];
+            }
+        }
+
+        if (firstLetterCor.getRowIdx()==secondLetterCor.getRowIdx()
+                && firstLetterCor.getColIdx()!=secondLetterCor.getColIdx()){
+            if (firstLetterCor.getColIdx()==0){
+                result[0] = key[firstLetterCor.getRowIdx()][key.length-1];
+            } else {
+                result[0] = key[firstLetterCor.getRowIdx()][firstLetterCor.getColIdx()-1];
+            }
+
+            if (secondLetterCor.getColIdx()==0){
+                result[1] = key[secondLetterCor.getRowIdx()][key.length-1];
+            } else {
+                result[1] = key[secondLetterCor.getRowIdx()][secondLetterCor.getColIdx()-1];
+            }
+        }
+
+        if (firstLetterCor.getRowIdx()!=secondLetterCor.getRowIdx()
+                && firstLetterCor.getColIdx()!=secondLetterCor.getColIdx()){
+            result[0] = key[firstLetterCor.getRowIdx()][secondLetterCor.getColIdx()];
+            result[1] = key[secondLetterCor.getRowIdx()][firstLetterCor.getColIdx()];
+        }
+
+        return result;
+    }
+
     @Override
     public String encode(String textToEncode) {
         StringBuilder processedText = new StringBuilder();
@@ -153,7 +200,7 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             Character firstLetter = textToEncode.toCharArray()[index];
             Character secondLetter = textToEncode.toCharArray()[index + 1];
 
-            Character [] encodedLetters = encryptLetter(firstLetter, secondLetter);
+            Character [] encodedLetters = encryptLetters(firstLetter, secondLetter);
             processedText.append(encodedLetters[0]);
             processedText.append(encodedLetters[1]);
         }
@@ -163,23 +210,37 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
         return processedText.toString();
     }
 
+    @Override
+    public String decode(String textToDecode) {
+        StringBuilder processedText = new StringBuilder();
+
+        if (textToDecode.length()%2!=0){
+            return processedText.toString();
+        }
+
+        for (int index=0; index<textToDecode.length(); index+=2) {
+            Character firstLetter = textToDecode.toCharArray()[index];
+            Character secondLetter = textToDecode.toCharArray()[index + 1];
+
+            Character [] encodedLetters = decryptLetters(firstLetter, secondLetter);
+            processedText.append(encodedLetters[0]);
+            processedText.append(encodedLetters[1]);
+        }
+
+        return processedText.toString();
+    }
+
     public void test(){
-        Character [] res = encryptLetter('D', 'E');
+        Character [] res = decryptLetters('B', 'M');
         System.out.println(res[0] + " " + res[1]);
 
-        res = encryptLetter('E', 'X');
+        res = decryptLetters('Z', 'B');
         System.out.println(res[0] + " " + res[1]);
 
-        res = encryptLetter('H', 'I');
+        res = decryptLetters('X', 'M');
         System.out.println(res[0] + " " + res[1]);
 
-        res = encryptLetter('T', 'H');
-        System.out.println(res[0] + " " + res[1]);
-
-        res = encryptLetter('E', 'G');
-        System.out.println(res[0] + " " + res[1]);
-
-        res = encryptLetter('O', 'L');
+        res = decryptLetters('O', 'D');
         System.out.println(res[0] + " " + res[1]);
     }
 }

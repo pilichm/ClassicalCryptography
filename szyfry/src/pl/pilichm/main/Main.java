@@ -71,5 +71,7 @@ public class Main {
         String plainText = "hide the gold in the tree stump";
         String encodedText = pc.encode(plainText);
         System.out.println(encodedText);
+        String decodedText = pc.decode(encodedText);
+        System.out.println(decodedText);
     }
 }
