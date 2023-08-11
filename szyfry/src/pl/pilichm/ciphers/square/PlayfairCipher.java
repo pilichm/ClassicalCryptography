@@ -73,6 +73,9 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
 
     /**
      * Encrypts a pair of letters.
+     * If letters form column pick letter below each letter. Wrap to top if needed.
+     * If letters form row select letters right of each letter. Wrap to left if needed.
+     * If letters form square return letters from opposite corners.
      * @param firstLetter -> first letter for encryption.
      * @param secondLetter -> second letter for encryption.
      * @return -> Two encrypted letters as array.
@@ -83,9 +86,6 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
         Coordinates firstLetterCor = getLocationOfLetter(firstLetter);
         Coordinates secondLetterCor = getLocationOfLetter(secondLetter);
 
-        /*
-         * If letters form column pick letter below each letter. Wrap to top if needed.
-         */
         if (firstLetterCor.getColIdx()==secondLetterCor.getColIdx()
                 && firstLetterCor.getRowIdx()!=secondLetterCor.getRowIdx()){
             if (firstLetterCor.getRowIdx()==key.length){
@@ -101,9 +101,6 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             }
         }
 
-        /*
-         * If letters form row select letters right of each letter. Wrap to left if needed.
-         */
         if (firstLetterCor.getRowIdx()==secondLetterCor.getRowIdx()
                 && firstLetterCor.getColIdx()!=secondLetterCor.getColIdx()){
             if (firstLetterCor.getColIdx()==key[0].length){
@@ -119,25 +116,25 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             }
         }
 
-        /*
-         * If letters form square return letters from opposite corners.
-         */
-        if (firstLetterCor.getRowIdx()!=secondLetterCor.getRowIdx()
-                && firstLetterCor.getColIdx()!=secondLetterCor.getColIdx()){
-                result[0] = key[firstLetterCor.getRowIdx()][secondLetterCor.getColIdx()];
-                result[1] = key[secondLetterCor.getRowIdx()][firstLetterCor.getColIdx()];
-        }
+        result = processLettersFormingSquare(firstLetterCor, secondLetterCor);
 
         return result;
     }
 
+    /**
+     * Decrypts a pair of letters.
+     * If letters form column pick letter above each letter. Wrap to down if needed.
+     * If letters form row select letters left of each letter. Wrap to right if needed.
+     * If letters form square return letters from opposite corners.
+     * @param firstLetter -> first letter for encryption.
+     * @param secondLetter -> second letter for encryption.
+     * @return -> Two decrypted letters as array.
+     */
     private Character[] decryptLetters(Character firstLetter, Character secondLetter) {
         Character [] result = new Character[2];
 
         Coordinates firstLetterCor = getLocationOfLetter(firstLetter);
         Coordinates secondLetterCor = getLocationOfLetter(secondLetter);
-        System.out.println(firstLetterCor);
-        System.out.println(secondLetterCor);
 
         if (firstLetterCor.getColIdx()==secondLetterCor.getColIdx()
                 && firstLetterCor.getRowIdx()!=secondLetterCor.getRowIdx()){
@@ -169,12 +166,21 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             }
         }
 
-        if (firstLetterCor.getRowIdx()!=secondLetterCor.getRowIdx()
-                && firstLetterCor.getColIdx()!=secondLetterCor.getColIdx()){
-            result[0] = key[firstLetterCor.getRowIdx()][secondLetterCor.getColIdx()];
-            result[1] = key[secondLetterCor.getRowIdx()][firstLetterCor.getColIdx()];
-        }
+        result = processLettersFormingSquare(firstLetterCor, secondLetterCor);
 
+        return result;
+    }
+
+    /**
+     * For a pair of letters coordinates returns letters from opposing corners of square formed by letters coordinates,
+     * @param firstLetterCor -> coordinates of first letter.
+     * @param secondLetterCor -> coordinates of second letter.
+     * @return -> Array containing a pair of letters from opposing corners.
+     */
+    private Character [] processLettersFormingSquare(Coordinates firstLetterCor, Coordinates secondLetterCor){
+        Character [] result = new Character[2];
+        result[0] = key[firstLetterCor.getRowIdx()][secondLetterCor.getColIdx()];
+        result[1] = key[secondLetterCor.getRowIdx()][firstLetterCor.getColIdx()];
         return result;
     }
 
@@ -183,8 +189,6 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
         StringBuilder processedText = new StringBuilder();
         textToEncode = textToEncode.toUpperCase();
         textToEncode = textToEncode.replace(" ", "");
-
-        System.out.println(textToEncode);
 
         for (Character letter : getAlphabet()){
             if (textToEncode.contains(letter + String.valueOf(letter))){
@@ -204,8 +208,6 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             processedText.append(encodedLetters[0]);
             processedText.append(encodedLetters[1]);
         }
-
-        System.out.println(textToEncode);
 
         return processedText.toString();
     }
