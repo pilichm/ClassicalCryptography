@@ -2,6 +2,7 @@ package pl.pilichm.ciphers.square;
 
 import pl.pilichm.ciphers.AbstractCipher;
 import pl.pilichm.ciphers.Cipher;
+import pl.pilichm.util.Coordinates;
 
 public class PlayfairCipher extends AbstractCipher implements Cipher {
     private Character [][] key = {
@@ -11,40 +12,6 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             new Character[]{'K', 'N', 'O', 'Q', 'S'},
             new Character[]{'T', 'U', 'V', 'W', 'Z'}
     };
-
-    /**
-     * Class for holding row and column number of letter.
-     */
-    private static class Coordinates{
-        private int rowIdx;
-        private int colIdx;
-
-        public Coordinates(){
-            this.rowIdx = -1;
-            this.colIdx = -1;
-        }
-
-        public int getRowIdx() {
-            return rowIdx;
-        }
-
-        public int getColIdx() {
-            return colIdx;
-        }
-
-        public void setRowIdx(int rowIdx) {
-            this.rowIdx = rowIdx;
-        }
-
-        public void setColIdx(int colIdx) {
-            this.colIdx = colIdx;
-        }
-
-        @Override
-        public String toString() {
-            return "Row: " + this.rowIdx + ", col: " + colIdx;
-        }
-    }
 
     /**
      * Function for searching of row and column indexes for given letter.

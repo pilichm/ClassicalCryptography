@@ -1,5 +1,6 @@
 package pl.pilichm.main;
 
+import pl.pilichm.ciphers.square.FourSquareCipher;
 import pl.pilichm.ciphers.square.PlayfairCipher;
 import pl.pilichm.ciphers.substitution.*;
 import pl.pilichm.ciphers.transposition.ColumnarTranspositionCipher;
@@ -66,12 +67,11 @@ public class Main {
 //        String decodedText = rfc.decode(encodedText);
 //        System.out.println(decodedText);
 
-        PlayfairCipher pc = new PlayfairCipher();
-        //pc.test();
-        String plainText = "hide the gold in the tree stump";
-        String encodedText = pc.encode(plainText);
+        FourSquareCipher fsc = new FourSquareCipher();
+        String plainText = "help me Obiwan Kenobi";
+        String encodedText = fsc.encode(plainText);
         System.out.println(encodedText);
-        String decodedText = pc.decode(encodedText);
+        String decodedText = fsc.decode(encodedText);
         System.out.println(decodedText);
     }
 }
