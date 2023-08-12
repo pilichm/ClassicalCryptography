@@ -68,7 +68,7 @@ public class Main {
 //        System.out.println(decodedText);
 
         FourSquareCipher fsc = new FourSquareCipher();
-        String plainText = "help me Obiwan Kenobi";
+        String plainText = "Help me Obi-Wan Kenobi";
         String encodedText = fsc.encode(plainText);
         System.out.println(encodedText);
         String decodedText = fsc.decode(encodedText);

@@ -93,6 +93,14 @@ public class FourSquareCipher extends AbstractCipher implements Cipher {
         textToProcess = textToProcess.toUpperCase();
         textToProcess = textToProcess.replace(" ", "");
 
+        if (isEncryption){
+            for (Character letter : nonLetterCharacters){
+                if (textToProcess.contains(letter.toString())){
+                    textToProcess = textToProcess.replace(letter.toString(), "");
+                }
+            }
+        }
+
         if (isEncryption&&textToProcess.length()%2!=0){
             textToProcess = textToProcess + 'X';
         }
@@ -110,7 +118,7 @@ public class FourSquareCipher extends AbstractCipher implements Cipher {
             processedText.append(" ");
         }
 
-        return processedText.toString();
+        return processedText.toString().trim();
     }
 
     @Override
