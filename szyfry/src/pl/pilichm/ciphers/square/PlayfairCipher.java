@@ -1,10 +1,9 @@
 package pl.pilichm.ciphers.square;
 
-import pl.pilichm.ciphers.AbstractCipher;
 import pl.pilichm.ciphers.Cipher;
 import pl.pilichm.util.Coordinates;
 
-public class PlayfairCipher extends AbstractCipher implements Cipher {
+public class PlayfairCipher extends AbstractSquareCipher implements Cipher {
     private Character [][] key = {
             new Character[]{'P', 'L', 'A', 'Y', 'F'},
             new Character[]{'I', 'R', 'E', 'X', 'M'},
@@ -83,7 +82,7 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             }
         }
 
-        result = processLettersFormingSquare(firstLetterCor, secondLetterCor);
+        result = processLettersFormingSquare(key, firstLetterCor, secondLetterCor);
 
         return result;
     }
@@ -133,21 +132,8 @@ public class PlayfairCipher extends AbstractCipher implements Cipher {
             }
         }
 
-        result = processLettersFormingSquare(firstLetterCor, secondLetterCor);
+        result = processLettersFormingSquare(key, firstLetterCor, secondLetterCor);
 
-        return result;
-    }
-
-    /**
-     * For a pair of letters coordinates returns letters from opposing corners of square formed by letters coordinates,
-     * @param firstLetterCor -> coordinates of first letter.
-     * @param secondLetterCor -> coordinates of second letter.
-     * @return -> Array containing a pair of letters from opposing corners.
-     */
-    private Character [] processLettersFormingSquare(Coordinates firstLetterCor, Coordinates secondLetterCor){
-        Character [] result = new Character[2];
-        result[0] = key[firstLetterCor.getRowIdx()][secondLetterCor.getColIdx()];
-        result[1] = key[secondLetterCor.getRowIdx()][firstLetterCor.getColIdx()];
         return result;
     }
 

@@ -1,10 +1,9 @@
 package pl.pilichm.ciphers.square;
 
-import pl.pilichm.ciphers.AbstractCipher;
 import pl.pilichm.ciphers.Cipher;
 import pl.pilichm.util.Coordinates;
 
-public class FourSquareCipher extends AbstractCipher implements Cipher {
+public class FourSquareCipher extends AbstractSquareCipher implements Cipher {
     private Character [][] key = {
             new Character[]{'a', 'b', 'c', 'd', 'e', 'E', 'X', 'A', 'M', 'P'},
             new Character[]{'f', 'g', 'h', 'i', 'j', 'L', 'B', 'C', 'D', 'F'},
@@ -69,19 +68,6 @@ public class FourSquareCipher extends AbstractCipher implements Cipher {
     }
 
     /**
-     * For a pair of letters coordinates returns letters from opposing corners of square formed by letters coordinates,
-     * @param firstLetterCor -> coordinates of first letter.
-     * @param secondLetterCor -> coordinates of second letter.
-     * @return -> Array containing a pair of letters from opposing corners.
-     */
-    private Character [] processLettersFormingSquare(Coordinates firstLetterCor, Coordinates secondLetterCor){
-        Character [] result = new Character[2];
-        result[0] = key[firstLetterCor.getRowIdx()][secondLetterCor.getColIdx()];
-        result[1] = key[secondLetterCor.getRowIdx()][firstLetterCor.getColIdx()];
-        return result;
-    }
-
-    /**
      * Function for encrypting and decrypting String.
      * @param textToProcess -> text that should be encrypted or decrypted,
      * @param isEncryption -> True when operation is encryption, in that case input string is pad so that it contains
@@ -112,7 +98,7 @@ public class FourSquareCipher extends AbstractCipher implements Cipher {
             Coordinates firstLetterCor = getCoordinatesForLetter(firstLetter, true, isEncryption);
             Coordinates secondLetterCor = getCoordinatesForLetter(secondLetter, false, isEncryption);
 
-            Character [] result = processLettersFormingSquare(firstLetterCor, secondLetterCor);
+            Character [] result = processLettersFormingSquare(key, firstLetterCor, secondLetterCor);
             processedText.append(Character.toUpperCase(result[0]));
             processedText.append(Character.toUpperCase(result[1]));
             processedText.append(" ");
