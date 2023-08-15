@@ -76,19 +76,10 @@ public class FourSquareCipher extends AbstractSquareCipher implements Cipher {
      */
     private String processText(String textToProcess, boolean isEncryption){
         StringBuilder processedText = new StringBuilder();
-        textToProcess = textToProcess.toUpperCase();
-        textToProcess = textToProcess.replace(" ", "");
+        textToProcess = clearText(textToProcess);
 
         if (isEncryption){
-            for (Character letter : nonLetterCharacters){
-                if (textToProcess.contains(letter.toString())){
-                    textToProcess = textToProcess.replace(letter.toString(), "");
-                }
-            }
-        }
-
-        if (isEncryption&&textToProcess.length()%2!=0){
-            textToProcess = textToProcess + 'X';
+            textToProcess = prepareTextToEncode(textToProcess);
         }
 
         for (int index=0; index<textToProcess.length(); index+=2){

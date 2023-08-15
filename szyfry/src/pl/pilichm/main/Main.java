@@ -2,6 +2,7 @@ package pl.pilichm.main;
 
 import pl.pilichm.ciphers.square.FourSquareCipher;
 import pl.pilichm.ciphers.square.PlayfairCipher;
+import pl.pilichm.ciphers.square.TwoSquareCipher;
 import pl.pilichm.ciphers.substitution.*;
 import pl.pilichm.ciphers.transposition.ColumnarTranspositionCipher;
 import pl.pilichm.ciphers.transposition.RailFenceCipher;
@@ -67,11 +68,11 @@ public class Main {
 //        String decodedText = rfc.decode(encodedText);
 //        System.out.println(decodedText);
 
-        FourSquareCipher fsc = new FourSquareCipher();
-        String plainText = "Help me Obi-Wan Kenobi";
-        String encodedText = fsc.encode(plainText);
+        TwoSquareCipher tsc = new TwoSquareCipher();
+        String plaintext = "Help me Obi-Wan Kenobi";
+        String encodedText = tsc.encode(plaintext);
         System.out.println(encodedText);
-        String decodedText = fsc.decode(encodedText);
+        String decodedText = tsc.decode(encodedText);
         System.out.println(decodedText);
     }
 }

@@ -140,18 +140,9 @@ public class PlayfairCipher extends AbstractSquareCipher implements Cipher {
     @Override
     public String encode(String textToEncode) {
         StringBuilder processedText = new StringBuilder();
-        textToEncode = textToEncode.toUpperCase();
-        textToEncode = textToEncode.replace(" ", "");
+        textToEncode = clearText(textToEncode);
 
-        for (Character letter : getAlphabet()){
-            if (textToEncode.contains(letter + String.valueOf(letter))){
-                textToEncode = textToEncode.replace(letter + String.valueOf(letter), letter + "X" + String.valueOf(letter));
-            }
-        }
-
-        if (textToEncode.length()%2!=0){
-            textToEncode = textToEncode + 'X';
-        }
+        textToEncode = prepareTextToEncode(textToEncode);
 
         for (int index=0; index<textToEncode.length(); index+=2){
             Character firstLetter = textToEncode.toCharArray()[index];
