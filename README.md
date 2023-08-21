@@ -89,6 +89,81 @@ W . . . E . . . C . . . R . . . U . . . O . . . <br>
 <b>Ciphertext:</b><br>
 WECRUO ERDSOEERNTNE AIVDAC
 
+<h3>Square</h3>
+<h4>Playfair</h4>
+https://en.wikipedia.org/wiki/Playfair_cipher
+
+The technique encrypts pairs of letters (bigrams or digrams), instead of single letters.
+Key is a matrix containing letters.
+For encryption if letters form square then pick letters from opposite corners. If letters form column pick letter below each letter, wrap to top if needed. If letters rowm row select letters right to each letter, wrap to left if needed.
+
+Decryption is similar, with difference that for letters forming column one should select letters above, and for letters forming row letters to the left.
+
+<b>Plaintext: </b>hide the gold in the tree stump
+<br>
+<b>Encryption matrix:</b>
+<br>
+P L A Y F<br>
+I R E X M<br>
+B C D G H<br>
+K N O Q S<br>
+T U V W Z<br>
+
+<b>Ciphertext:</b><br>
+BM OD ZB XD NA BE KU DM UI XM MO UV IF
+
+<h4>Two-Square</h4>
+https://en.wikipedia.org/wiki/Two-square_cipher
+
+The Two-square cipher, also called double Playfair, is a manual symmetric encryption technique.
+The technique encrypts pairs of letters.
+The two-square cipher uses two 5x5 matrices and comes in two varieties, horizontal and vertical.
+
+<b>Plaintext: </b>he lp me ob iw an ke no bi
+<br>
+<b>Encryption matrix:</b>
+<br>
+E X A M P<br>
+L B C D F<br>
+G H I J K<br>
+N O R S T<br>
+U V W Y Z<br>
+ <br><br>
+K E Y W O<br>
+R D A B C<br>
+F G H I J<br>
+L M N P S<br>
+T U V X Z<br>
+<br>
+<b>Ciphertext:</b><br>
+HE DL XW SD JY AN HO TK DG
+
+<h4>Four-square</h4>
+https://en.wikipedia.org/wiki/Four-square_cipher
+
+The four-square cipher is a manual symmetric encryption technique.
+The technique encrypts pairs of letters (digraphs).
+The four-square cipher uses four 5 by 5 (5x5) matrices arranged in a square. Each of the 5 by 5 matrices contains the letters of the alphabet (usually omitting "Q" or putting both "I" and "J" in the same location to reduce the alphabet to fit).
+
+<b>Plaintext: </b>he lp me ob iw an ke no bi
+<br>
+<b>Encryption matrix:</b>
+<br>
+a b c d e   E X A M P<br>
+f g h i j   L B C D F<br>
+k l m n o   G H I J K<br>
+p r s t u   N O R S T<br>
+v w x y z   U V W Y Z<br>
+ 
+K E Y W O   a b c d e<br>
+R D A B C   f g h i j<br>
+F G H I J   k l m n o<br>
+L M N P S   p r s t u<br>
+T U V X Z   v w x y z<br>
+<br>
+<b>Ciphertext:</b><br>
+FY GM KY HO BX MF KK KI MD
+
 <h3>Used technologies:</h3>
 
 - java (openjdk-20),
