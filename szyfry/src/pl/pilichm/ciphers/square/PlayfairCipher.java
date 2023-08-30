@@ -12,6 +12,10 @@ public class PlayfairCipher extends AbstractSquareCipher implements Cipher {
             new Character[]{'T', 'U', 'V', 'W', 'Z'}
     };
 
+    public void setKey(Character[][] key) {
+        this.key = key;
+    }
+
     /**
      * Function for searching of row and column indexes for given letter.
      * @param letter -> letter which row and column number must be found.

@@ -17,6 +17,12 @@ public class FourSquareCipher extends AbstractSquareCipher implements Cipher {
             new Character[]{'T', 'U', 'V', 'X', 'Z', 'v', 'w', 'x', 'y', 'z'}
     };
 
+    public void setKey(Character[][] key) {
+        for (int rowIdx=0; rowIdx<5; rowIdx++){
+            System.arraycopy(key[rowIdx], 0, this.key[rowIdx], 0, 5);
+        }
+    }
+
     /**
      * Returns coordinates for letter. For encryption first letter coordinates are selected from upper left corner.
      * For second letter coordinates are selected from lower right corner.

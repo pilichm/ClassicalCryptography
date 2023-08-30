@@ -17,6 +17,12 @@ public class TwoSquareCipher extends AbstractSquareCipher implements Cipher {
             new Character[]{'T', 'U', 'V', 'X', 'Z'}
     };
 
+    public void setKey(Character[][] key) {
+        for (int rowIdx=0; rowIdx<5; rowIdx++){
+            System.arraycopy(key[rowIdx], 0, this.key[rowIdx], 0, 5);
+        }
+    }
+
     private Coordinates getCoordinatesForLetter(Character letter, boolean isFirstLetter){
         Coordinates result = new Coordinates();
 
