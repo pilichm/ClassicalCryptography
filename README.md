@@ -26,6 +26,20 @@ Because there are 26 letters (2×13) in the basic Latin alphabet, ROT13 is its o
 
 <b>Ciphertext:</b> Jul qvq gur puvpxra pebff gur ebnq?
 
+<h4>Affine</h4>
+https://en.wikipedia.org/wiki/Affine_cipher
+
+The affine cipher is a type of monoalphabetic substitution cipher, where each letter in an alphabet is mapped to its numeric equivalent, encrypted using a simple mathematical function, and converted back to a letter.
+Each letter is enciphered with the function (ax + b) mod 26, where b is the magnitude of the shift.
+
+<h4>Example:</h4>
+
+<b>Plaintext:</b> A	F	F	I	N	E	C	I	P	H	E	R
+
+<b>Key:</b> a = b, b = 8
+
+<b>Ciphertext:</b> I	H	H	W	V	C	S	W	F	R	C	P
+
 <h4>Autokey</h4>
 https://en.wikipedia.org/wiki/Autokey_cipher
 
