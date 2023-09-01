@@ -19,7 +19,9 @@ public class FourSquareCipher extends AbstractSquareCipher implements Cipher {
 
     public void setKey(Character[][] key) {
         for (int rowIdx=0; rowIdx<5; rowIdx++){
-            System.arraycopy(key[rowIdx], 0, this.key[rowIdx], 0, 5);
+            for (int colIdx=0; colIdx<5; colIdx++){
+                this.key[rowIdx][colIdx] = key[rowIdx][colIdx];
+            }
         }
     }
 
