@@ -17,6 +17,7 @@ public class TwoSquareCipher extends AbstractSquareCipher implements Cipher {
             new Character[]{'T', 'U', 'V', 'X', 'Z'}
     };
 
+    @Override
     public void setKey(Character[][] key) {
         for (int rowIdx=0; rowIdx<5; rowIdx++){
             for (int colIdx=0; colIdx<5; colIdx++){

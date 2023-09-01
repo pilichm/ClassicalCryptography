@@ -12,6 +12,7 @@ public class PlayfairCipher extends AbstractSquareCipher implements Cipher {
             new Character[]{'T', 'U', 'V', 'W', 'Z'}
     };
 
+    @Override
     public void setKey(Character[][] key) {
         this.key = key;
     }

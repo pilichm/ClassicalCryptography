@@ -18,6 +18,8 @@ public class AbstractSquareCipher extends AbstractCipher {
         return result;
     }
 
+    public void setKey(Character[][] key) {}
+
     /**
      * Prepares plaintext for encryption. Non letter characters are removed. If text len is not even then additional
      * character is appended to end.
